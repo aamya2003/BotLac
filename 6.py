@@ -1,7 +1,7 @@
 import telebot
 from telebot.handler_backends import ContinueHandling
 
-token = "7515698207:AAH8vxp3bTLzpkMfb4g_l0cuURiQ4cEbA2Q"
+token = "token"
 
 bot = telebot.TeleBot(token)
 

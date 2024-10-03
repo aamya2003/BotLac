@@ -1,6 +1,6 @@
 import telebot
 
-token = "ضع التوكن الخاص بك هنا"
+token = "token"
 
 bot = telebot.TeleBot(token)
 
