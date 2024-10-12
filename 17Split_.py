@@ -1,13 +1,13 @@
 
 
-## split
+# # split
 
-#++++| split(separator, maxsplit) |++++#
+# ++++| split(separator, maxsplit) |++++#
 
-#*** 1- separator => Optional. Specifies the separator to use when splitting the string.
+# *** 1- separator => Optional. Specifies the separator to use when splitting the string.
 #              By default any whitespace is a separator
 
-#*** 2- maxsplit =>	Optional. Specifies how many splits to do.
+# *** 2- maxsplit =>	Optional. Specifies how many splits to do.
 #               Default value is -1, which is "all occurrences"
 
 
