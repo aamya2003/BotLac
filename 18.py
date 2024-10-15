@@ -1,39 +1,55 @@
 
 import telebot
-from telebot.util import content_type_media
-from telebot import util
 
 token = ""
 bot = telebot.TeleBot(token)
 
 
-# @bot.message_handler() => Used as a decoration, it is easier to read and provides direct customizations.
-# bot.register_message_handler() => It provides an alternative way to register processors, which may be useful in certain situations.
 
 
-# Usgs of rmh (register_message_handler)
-#   If you need to register a message handler based on a specific condition or runtime state, 
-#   register_message_handler() is more convenient. 
-#   For example:
-#     you can register a new handler based on user interaction or a special condition.
+#<=> register_next_step_handler <=>
+# => It's useful when you need to split a conversation with the user into multiple steps.
+# =>This function helps you handle the next messages from the user after one step is executed.
 
 
-
-active = True
-
-@bot.message_handler(commands=['s', 'h'])
-def RCS(msg):
-    bot.send_message(msg.chat.id, "A new msg command here.")
-
-    if msg.text.startswith('/h'):
-        bot.register_message_handler(doSomething, content_types=['photo'])
+## How Is It Work?
+# ----When using register_next_step_handler:
+#      1-  the current function is `suspended`
+#      2- and a specific function `is registered to be called` when the user sends their next message.
 
 
-def doSomething(msg):
-    bot.send_message(msg.chat.id, 1223733)
+# Send /sv
+# Send your name
+# send myname 
+# Send your age
+# send myage
+# your data is ....
 
 
 
+@bot.message_handler(commands=['sv'])
+def HandlerSv(msg):
+    bot.send_message(msg.chat.id, "Send Your name: ")
+    bot.register_next_step_handler(msg, HandlerName)
+
+
+def HandlerName(msg):
+    if msg.text.startswith("/sv"):
+        HandlerSv(msg)
+    else:
+        bot.send_message(msg.chat.id, "Send Your age: ")
+        bot.register_next_step_handler(msg, HandlerAge, msg.text)
+
+
+    
+def HandlerAge(msg, name):
+    if msg.text.startswith("/sv"):
+        HandlerSv(msg)
+    else:
+        bot.send_message(msg.chat.id, f"Done, Your name is {name}, and your age is {msg.text}")
+
+
+    
 
 
 print("Bot Running Now ❤️")
