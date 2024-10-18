@@ -59,4 +59,3 @@ def hanlder_(msg):
 
 print("Bot Running Now ❤️")
 bot.polling()
-
